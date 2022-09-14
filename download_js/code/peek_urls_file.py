@@ -1,8 +1,4 @@
-import os
-
-path = os.getcwd()
-
-with open("download_js/data/top-1m.csv") as f:
+with open("../data/top-1m.csv") as f:
     count = 0
     for line in f.readlines():
         print(line)
