@@ -46,5 +46,17 @@ ruleTester.run("cryptojs-misuse", rule, {
         { message: "Less than 1000 iterations", type: "CallExpression" },
       ],
     },
+    {
+      code: "require('crypto'); generateKeyPairSync('rsa', {modulusLength: 1024,});",
+      errors: [
+        { message: "Key length is too short, suggest to use 2048 bits or more", type: "CallExpression" },
+      ],
+    },
+    {
+      code: "require('crypto'); k = 1024; generateKeyPairSync('rsa', {modulusLength: k,});",
+      errors: [
+        { message: "Key length is too short, suggest to use 2048 bits or more", type: "CallExpression" },
+      ],
+    },
   ],
 });
