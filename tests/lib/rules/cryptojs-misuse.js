@@ -58,5 +58,37 @@ ruleTester.run("cryptojs-misuse", rule, {
         { message: "Key length is too short, suggest to use 2048 bits or more", type: "CallExpression" },
       ],
     },
+    {
+      code: "require('crypto'); m = 'rsa-pss'; k = 1024; generateKeyPairSync(m, {modulusLength: k,});",
+      errors: [
+        { message: "Key length is too short, suggest to use 2048 bits or more", type: "CallExpression" },
+      ],
+    },
+    {
+      code: "require('crypto'); key = 'gasfhksagflAGf%258925%'; a1 = crypto.createCipher('aes-256-ctr', key).update(a1, 'utf-8', 'hex');",
+      errors: [
+        { message: "Deprecated API", type: "CallExpression" },
+        { message: "Key should not be fixed", type: "CallExpression" },
+      ],
+    },
+    {
+      code: "require('crypto'); crypto.constants.RSA_PKCS1_PADDING",
+      errors: [
+        { message: "RSA should not use PKCS1-v1_5 padding", type: "MemberExpression" },
+      ],
+    },
+    {
+      code: "require('crypto'); crypto.constants.RSA_NO_PADDING",
+      errors: [
+        { message: "RSA should not use no padding", type: "MemberExpression" },
+      ],
+    },
+    {
+      code: "require('crypto'); crypto.createCipher('aes192', key)",
+      errors: [
+        { message: "Deprecated API", type: "CallExpression"},
+        { message: "CBC is not secure", type: "CallExpression" },
+      ],
+    },
   ],
 });
