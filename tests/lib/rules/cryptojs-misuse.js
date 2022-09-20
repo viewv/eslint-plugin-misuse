@@ -90,5 +90,19 @@ ruleTester.run("cryptojs-misuse", rule, {
         { message: "CBC is not secure", type: "CallExpression" },
       ],
     },
+    {
+      code: "require('crypto'); obj = { alg : 'aes192' }; crypto.createCipher(obj.alg, key)",
+      errors: [
+        { message: "Deprecated API", type: "CallExpression"},
+        { message: "CBC is not secure", type: "CallExpression" },
+      ],
+    },
+    {
+      code: "require('crypto'); m = 'aes192'; obj = { alg : m }; crypto.createCipher(obj.alg, key)",
+      errors: [
+        { message: "Deprecated API", type: "CallExpression"},
+        { message: "CBC is not secure", type: "CallExpression" },
+      ],
+    },
   ],
 });
