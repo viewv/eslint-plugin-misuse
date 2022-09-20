@@ -1,6 +1,8 @@
 crypto = require('node:crypto');
 
-const { publicKey, privateKey } = crypto.generateKeyPairSync("rsa", {modulusLength: 1024,});
+length = 4096;
+
+const { publicKey, privateKey } = crypto.generateKeyPairSync("rsa", {modulusLength: length,});
 
 console.log(publicKey, privateKey);
 
