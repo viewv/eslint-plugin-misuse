@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-misuse",
-  "version": "0.2.2",
+  "version": "0.2.4",
   "description": "crypto misuse",
   "keywords": [
     "eslint",
