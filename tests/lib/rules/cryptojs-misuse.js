@@ -98,7 +98,7 @@ ruleTester.run("cryptojs-misuse", rule, {
       ],
     },
     {
-      code: "require('crypto'); m = 'aes192'; obj = { alg : m }; crypto.createCipher(obj.alg, key)",
+      code: "require('crypto'); var decipher = crypto.createDecipher('aes192', key);",
       errors: [
         { message: "Deprecated API", type: "CallExpression"},
         { message: "CBC is not secure", type: "CallExpression" },
